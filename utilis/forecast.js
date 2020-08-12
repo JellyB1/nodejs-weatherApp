@@ -1,6 +1,6 @@
 const request = require('request')
 
-const forecast = (lon, lat, callback) => {
+const forecast = (lat, lon, callback) => {
 	const url = `http://api.weatherstack.com/current?access_key=f1e484660472347458a1e0ea74a81695&query=${lat},${lon}`
 
 	request({
@@ -18,11 +18,7 @@ const forecast = (lon, lat, callback) => {
 		const desc = res.current.weather_descriptions[0]
 			callback(undefined, 
 				`It is currently ${temp} degress outside and it is ${desc}.`
-
 			)
-			
-			
-			
 		}
 	})
 }

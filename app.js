@@ -1,18 +1,26 @@
 const getGeo = require('./utilis/geocode')
 const forecast = require('./utilis/forecast')
 
-getGeo('Boston', (error, data) => {
-	if (error) {
-		console.log(error)
-	} else if (data) {
-		console.log(data)
-	}
-})
+const city = process.argv[2]
 
-forecast(-75.7088, 44.1545, (error, data) => {
-	if (error) {
-		console.log(error)
-	} else if (data) {
-		console.log(data)
-	}
-})
+if (!city) {
+	console.log("Please provide a city")
+} else {
+	getGeo(city, (error, data) => {
+		if (error) {
+			return console.log(error)
+		} 
+
+		forecast(data.lat, data.lon, (error, forecastData) => {
+			if (error) {
+				return console.log(error)
+			} 
+
+			console.log(data.location)
+			console.log(forecastData)
+		})
+	})
+}
+
+
+
